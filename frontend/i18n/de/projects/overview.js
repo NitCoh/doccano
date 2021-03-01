@@ -5,6 +5,7 @@ export default {
   textClassification: 'Textklassifikation',
   sequenceLabeling: 'Sequenz-Labeling',
   sequenceToSequence: 'Sequenz zu Sequenz',
+  vqaRelevantClassification: 'VQA Relevant Classification',
   randomizeDocOrder: 'Dokumentenreihenfolge zufällig wählen',
   shareAnnotations: 'Gemeinsame Annotationen für Nutzer',
   delete: 'Löschen',
@@ -14,6 +15,7 @@ export default {
   projectTypes: [
     'Textklassifikation',
     'Sequenz-Labeling',
-    'Sequenz zu Sequenz'
+    'Sequenz zu Sequenz',
+    'VQA Relevant Classification'
   ]
 }

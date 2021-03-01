@@ -23,7 +23,7 @@
         <h2>{{ $t('dataset.importDataMessage1') }}</h2>
         <v-radio-group
           v-model="selectedFormat"
-          :rules="fileFormatRules($t('rules.fileFormatRules'))"
+          :rules="fileFormatRules($t('rules.filFeFormatRules'))"
         >
           <v-radio
             v-for="(format, i) in formats"
@@ -121,9 +121,11 @@ export default {
             file: item
           })
         })
+        console.log('promises: ', JSON.stringify(promises))
         let p = Promise.resolve()
         promises.forEach((item) => {
           p = p.then(() => this.uploadDocument(item)).catch(() => {
+            console.log('hi1');
             this.errors.push(item.file.name)
             this.showError = true
           })

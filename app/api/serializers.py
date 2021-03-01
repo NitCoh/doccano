@@ -8,7 +8,7 @@ from rest_framework.exceptions import ValidationError
 
 
 from .models import Label, Project, Document, RoleMapping, Role, Comment, AutoLabelingConfig
-from .models import TextClassificationProject, SequenceLabelingProject, Seq2seqProject, Speech2textProject
+from .models import TextClassificationProject, SequenceLabelingProject, Seq2seqProject, Speech2textProject, VQARelevantClassificationProject
 from .models import DocumentAnnotation, SequenceAnnotation, Seq2seqAnnotation, Speech2textAnnotation
 
 
@@ -133,6 +133,15 @@ class TextClassificationProjectSerializer(ProjectSerializer):
         read_only_fields = ProjectSerializer.Meta.read_only_fields
 
 
+class VQARelevantClassificationSerializer(ProjectSerializer):
+
+    class Meta:
+        model = VQARelevantClassificationProject
+        fields = ProjectSerializer.Meta.fields
+        read_only_fields = ProjectSerializer.Meta.read_only_fields
+
+
+
 class SequenceLabelingProjectSerializer(ProjectSerializer):
 
     class Meta:
@@ -165,6 +174,7 @@ class ProjectPolymorphicSerializer(PolymorphicSerializer):
         SequenceLabelingProject: SequenceLabelingProjectSerializer,
         Seq2seqProject: Seq2seqProjectSerializer,
         Speech2textProject: Speech2textProjectSerializer,
+        VQARelevantClassificationProject: VQARelevantClassificationSerializer
     }
 
 

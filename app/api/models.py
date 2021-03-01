@@ -16,11 +16,13 @@ DOCUMENT_CLASSIFICATION = 'DocumentClassification'
 SEQUENCE_LABELING = 'SequenceLabeling'
 SEQ2SEQ = 'Seq2seq'
 SPEECH2TEXT = 'Speech2text'
+VQA_RELEVANT_CLASSIFICATION = 'VQARelevantClassification'
 PROJECT_CHOICES = (
     (DOCUMENT_CLASSIFICATION, 'document classification'),
     (SEQUENCE_LABELING, 'sequence labeling'),
     (SEQ2SEQ, 'sequence to sequence'),
     (SPEECH2TEXT, 'speech to text'),
+    (VQA_RELEVANT_CLASSIFICATION, 'vqa relevant classification')
 )
 
 
@@ -71,6 +73,29 @@ class TextClassificationProject(Project):
 
     def get_bundle_name_download(self):
         return 'download_text_classification'
+
+    def get_annotation_serializer(self):
+        from .serializers import DocumentAnnotationSerializer
+        return DocumentAnnotationSerializer
+
+    def get_annotation_class(self):
+        return DocumentAnnotation
+
+    def get_storage(self, data):
+        from .utils import ClassificationStorage
+        return ClassificationStorage(data, self)
+
+
+class VQARelevantClassificationProject(Project):
+
+    def get_bundle_name(self):
+        return 'vqa_relevant_classification'
+
+    def get_bundle_name_upload(self):
+        return 'upload_vqa_relevant_classification'
+
+    def get_bundle_name_download(self):
+        return 'download_vqa_relevant_classification'
 
     def get_annotation_serializer(self):
         from .serializers import DocumentAnnotationSerializer

@@ -5,6 +5,7 @@ export default {
   textClassification: '文本分类',
   sequenceLabeling: '序列标注',
   sequenceToSequence: '序列到序列',
+  vqaRelevantClassification: 'VQA Relevant Classification',
   randomizeDocOrder: '随机文档顺序',
   shareAnnotations: '在所有用户共享标注',
   delete: '删除',
@@ -14,6 +15,7 @@ export default {
   projectTypes: [
     '文本分类',
     '序列标注',
-    '序列到序列'
+    '序列到序列',
+    'VQA Relevant Classification'
   ]
 }

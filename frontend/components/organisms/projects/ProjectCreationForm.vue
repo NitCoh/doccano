@@ -91,6 +91,8 @@ export default {
         return 'SequenceLabeling'
       } else if (this.projectType === this.$t('overview.sequenceToSequence')) {
         return 'Seq2seq'
+      }else if(this.projectType === this.$t('overview.vqaRelevantClassification')){
+        return 'VQARelevantClassification'
       }
     },
     getResourceType() {
@@ -100,6 +102,8 @@ export default {
         return 'SequenceLabelingProject'
       } else if (this.projectType === this.$t('overview.sequenceToSequence')) {
         return 'Seq2seqProject'
+      }else if(this.projectType === this.$t('overview.vqaRelevantClassification')){
+        return 'VQARelevantClassificationProject'
       }
     },
     validate() {
