@@ -16,6 +16,11 @@ python manage.py migrate
 python manage.py create_roles
 
 echo "Creating admin"
+echo "Printing admin args"
+echo "ADMIN_USERNAME:" "${ADMIN_USERNAME}"
+echo "ADMIN_PASSWORD:" "${ADMIN_PASSWORD}"
+echo "ADMIN_EMAIL:" "${ADMIN_EMAIL}"
+echo
 if [[ -n "${ADMIN_USERNAME}" ]] && [[ -n "${ADMIN_PASSWORD}" ]] && [[ -n "${ADMIN_EMAIL}" ]]; then
   python manage.py create_admin \
     --username "${ADMIN_USERNAME}" \
