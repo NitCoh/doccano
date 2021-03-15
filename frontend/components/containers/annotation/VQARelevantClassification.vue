@@ -105,7 +105,8 @@ export default {
 
         getCurrentImageLink() {
             const meta = JSON.parse(this.currentDoc.meta);
-            return `https://gqa-images.s3.amazonaws.com/${meta.img_id}.jpg`;
+            const prefix = process.env.S3_BUCKET_PREFIX || `https://gqa-subset-images.s3.amazonaws.com/images-none-relevant-subset/`;
+            return `${prefix}${meta.img_id}`;
         },
         removeLabel(annotationId) {
             const payload = {
