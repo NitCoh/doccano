@@ -3,7 +3,7 @@
     v-model="annotatedLabels"
     :items="labels"
     item-text="text"
-    :label="$t('labels.labels')"
+    label="Is the question challenging?"
     hide-selected
     chips
     multiple

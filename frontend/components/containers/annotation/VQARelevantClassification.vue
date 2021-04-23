@@ -4,7 +4,7 @@
             v-shortkey="multiKeys"
             :loading="loading"
             class="mx-auto my-12"
-            max-width="500"
+            max-width="550"
             @shortkey="addOrRemoveLabel"
     >
         <template slot="progress">
@@ -17,19 +17,32 @@
 
         <v-img
                 contain
+                position="center"
                 max-width="500"
                 max-height="400"
                 :src="getCurrentImageLink()"
         ></v-img>
-
-<!--        <v-card-title>Total Annotated: {{num_of_annotated}}</v-card-title>-->
 
 
         <v-divider class="mx-4"></v-divider>
 
         <v-card-title> {{currentDoc.text}}</v-card-title>
 
+        <v-divider class="mx-4"></v-divider>
+
+
+        <v-textarea
+                outlined
+                clearable
+                clear-icon="mdi-close-circle"
+                name="input-7-4"
+                label="Answer"
+                :value="metaDataRetriever('answer')"
+                @change="omitAns({ id: currentDoc.id, answer: $event }, 'answer')"
+        ></v-textarea>
+
         <v-card-title>
+
             <multi-class-classification
                     :labels="items"
                     :annotations="currentDoc.annotations"
@@ -38,8 +51,19 @@
             />
         </v-card-title>
 
+        <v-textarea
+                outlined
+                clearable
+                clear-icon="mdi-close-circle"
+                name="input-7-4"
+                label="If yes, please explain how you reached your answer:"
+                :value="metaDataRetriever('explain')"
+                @change="omitAns({ id: currentDoc.id, explain: $event },'explain')"
+        ></v-textarea>
+
+
         <v-card-text>
-            <v-card-title class="font-weight-bold justify-center"> Annotation Guidelines</v-card-title>
+            <v-card-title class="font-weight-bold justify-center">Technical Annotation Guidelines</v-card-title>
             <v-divider class="mx-4"></v-divider>
             <v-timeline
             align-top
@@ -61,9 +85,7 @@
 </template>
 
 <script>
-// TODO:
-// TODO: 3. Add dynamic loading of an image.
-// TODO: 5. Support collaborative annotations.
+
 import Vue from 'vue';
 import { mapActions, mapGetters, mapState } from 'vuex';
 import MultiClassClassification from '@/components/organisms/annotation/MultiClassClassification'
@@ -101,8 +123,24 @@ export default {
     },
     methods: {
         ...mapActions('labels', ['getLabelList']),
-        ...mapActions('documents', ['getDocumentList', 'deleteAnnotation', 'updateAnnotation', 'addAnnotation']),
+        ...mapActions('documents', ['getDocumentList', 'deleteAnnotation', 'updateAnnotation', 'addAnnotation', 'updateDocument']),
 
+        metaDataRetriever(key){
+            const meta = JSON.parse(this.currentDoc.meta);
+            return meta[key] || '';
+        },
+        omitAns(payload, key) {
+            console.log(payload);
+            const meta = JSON.parse(this.currentDoc.meta);
+            meta[key] = payload[key];
+            console.log(meta);
+            const data = {
+                projectId: this.$route.params.id,
+                id: payload.id,
+                meta: JSON.stringify(meta)
+            };
+            this.updateDocument(data)
+        },
         getCurrentImageLink() {
             const meta = JSON.parse(this.currentDoc.meta);
             const prefix = process.env.S3_BUCKET_PREFIX || `https://gqa-subset-images.s3.amazonaws.com/images-none-relevant-subset/`;

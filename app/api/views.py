@@ -207,6 +207,7 @@ class DocumentDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated & IsInProjectReadOnlyOrAdmin]
 
 
+
 class AnnotationList(generics.ListCreateAPIView):
     pagination_class = None
     permission_classes = [IsAuthenticated & IsInProjectOrAdmin]

@@ -73,12 +73,12 @@
           <v-col cols="12" md="9">
             <nuxt />
           </v-col>
-          <v-col cols="12" md="3">
-            <metadata-box
-              v-if="currentDoc && !loading"
-              :metadata="JSON.parse(currentDoc.meta)"
-            />
-          </v-col>
+<!--          <v-col cols="12" md="3">-->
+<!--            <metadata-box-->
+<!--              v-if="currentDoc && !loading"-->
+<!--              :metadata="JSON.parse(currentDoc.meta)"-->
+<!--            />-->
+<!--          </v-col>-->
         </v-row>
       </v-container>
     </v-main>
@@ -116,7 +116,7 @@ export default {
     GuidelineButton,
     FilterButton,
     ApproveButton,
-    MetadataBox,
+    // MetadataBox,
     ClearAnnotationsButton,
     CommentButton,
     Settings
